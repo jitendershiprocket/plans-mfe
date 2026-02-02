@@ -1,0 +1,105 @@
+<div>
+  <h2 class="text-xl font-semibold text-gray-900 mb-6">Edit Sample Shipment</h2>
+  
+  <form [formGroup]="shipmentForm" class="space-y-6">
+    <!-- Weight Selection -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Weight</label>
+      <div class="flex gap-4">
+        @for (weight of weightOptions; track weight) {
+          <label class="flex items-center cursor-pointer">
+            <input 
+              type="radio" 
+              [value]="weight" 
+              formControlName="weight"
+              class="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+            >
+            <span class="ml-2 text-sm text-gray-700">{{ weight }}</span>
+          </label>
+        }
+      </div>
+    </div>
+
+    <!-- Mode Selection -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Mode</label>
+      <div class="flex gap-4">
+        @for (mode of modeOptions; track mode) {
+          <label class="flex items-center cursor-pointer">
+            <input 
+              type="radio" 
+              [value]="mode" 
+              formControlName="mode"
+              class="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+            >
+            <span class="ml-2 text-sm text-gray-700">{{ mode }}</span>
+          </label>
+        }
+      </div>
+    </div>
+
+    <!-- Payment Selection -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Payment</label>
+      <div class="flex gap-4">
+        @for (payment of paymentOptions; track payment) {
+          <label class="flex items-center cursor-pointer">
+            <input 
+              type="radio" 
+              [value]="payment" 
+              formControlName="payment"
+              class="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+            >
+            <span class="ml-2 text-sm text-gray-700">{{ payment }}</span>
+          </label>
+        }
+      </div>
+    </div>
+
+    <!-- Pickup Pincode -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Pincode</label>
+      <input 
+        type="text" 
+        formControlName="pickupPincode" 
+        placeholder="Enter pickup pincode"
+        maxlength="6"
+        class="input-field"
+        [class.input-error]="isFieldInvalid('pickupPincode')"
+      >
+      @if (isFieldInvalid('pickupPincode')) {
+        <p class="mt-1 text-sm text-red-600">
+          {{ getErrorMessage('pickupPincode') }}
+        </p>
+      }
+    </div>
+
+    <!-- Delivery Pincode -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">Delivery Pincode</label>
+      <input 
+        type="text" 
+        formControlName="deliveryPincode" 
+        placeholder="Enter delivery pincode"
+        maxlength="6"
+        class="input-field"
+        [class.input-error]="isFieldInvalid('deliveryPincode')"
+      >
+      @if (isFieldInvalid('deliveryPincode')) {
+        <p class="mt-1 text-sm text-red-600">
+          {{ getErrorMessage('deliveryPincode') }}
+        </p>
+      }
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end gap-3 pt-4">
+      <button type="button" (click)="onCancel()" class="btn btn-secondary">
+        Cancel
+      </button>
+      <button type="button" (click)="onCalculate()" class="btn btn-primary">
+        Calculate Shipment Cost
+      </button>
+    </div>
+  </form>
+</div>

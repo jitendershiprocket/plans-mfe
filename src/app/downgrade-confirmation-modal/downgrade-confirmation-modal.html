@@ -1,0 +1,32 @@
+<div class="text-center">
+  <div class="w-20 h-20 rounded-full bg-yellow-400 flex items-center justify-center mx-auto mb-6">
+    <span class="text-white text-5xl font-bold">?</span>
+  </div>
+  
+  <h2 class="text-xl font-semibold text-gray-900 mb-6">Are you sure you want to switch to {{ targetPlan?.name }} Plan?</h2>
+  
+  <div class="bg-yellow-50 rounded-lg p-5 mb-6 text-left">
+    <h3 class="text-base font-semibold text-gray-900 mb-4">Benefits you will lose out on</h3>
+    <ul class="space-y-2">
+      @for (benefit of benefits; track benefit) {
+        <li class="flex items-start text-sm text-gray-700">
+          <span class="w-6 h-6 rounded-full bg-yellow-400 text-white flex items-center justify-center font-bold mr-3 flex-shrink-0">−</span>
+          <span>{{ benefit }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+
+  <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+    If you switch now, your current plan benefits will continue until the end of this billing cycle and the new plan will start from <strong class="text-gray-900">{{ effectiveDate }}</strong>.
+  </p>
+
+  <div class="flex gap-3 justify-end">
+    <button (click)="onKeepCurrentPlan()" class="btn btn-outline">
+      Keep Current Plan
+    </button>
+    <button (click)="onConfirmPlan()" class="btn btn-primary">
+      Confirm Plan
+    </button>
+  </div>
+</div>

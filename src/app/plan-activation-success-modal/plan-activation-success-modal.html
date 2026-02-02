@@ -1,0 +1,46 @@
+<div class="text-center">
+  <div class="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6">
+    <span class="text-white text-5xl font-bold">✓</span>
+  </div>
+  
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ plan?.name }} Plan Activated!</h2>
+  
+  <p class="text-base text-gray-600 mb-6 leading-relaxed">
+    Your shipping journey just got better, with even more rates and features that support your growth.
+  </p>
+
+  <div class="bg-gray-50 rounded-lg p-5 mb-6 text-left">
+    <h3 class="text-base font-semibold text-gray-900 mb-4">Here's what your upgraded plan unlocks for you</h3>
+    <ul class="space-y-2">
+      <li class="flex items-start text-sm text-gray-700">
+        <span class="text-green-500 font-bold mr-2">✓</span>
+        <span>Steps at low per-order rates based on your volume</span>
+      </li>
+      <li class="flex items-start text-sm text-gray-700">
+        <span class="text-green-500 font-bold mr-2">✓</span>
+        <span>Receive monthly volume optimization to increase delivery rates</span>
+      </li>
+      <li class="flex items-start text-sm text-gray-700">
+        <span class="text-green-500 font-bold mr-2">✓</span>
+        <span>Got priority support for faster issue resolution</span>
+      </li>
+      <li class="flex items-start text-sm text-gray-700">
+        <span class="text-green-500 font-bold mr-2">✓</span>
+        <span>Access a dedicated account manager for guidance</span>
+      </li>
+    </ul>
+  </div>
+
+  <p class="text-xs text-gray-600 mb-6">
+    Your billing cycle will be on <strong class="text-gray-900">{{ billingCycleDate }}</strong>. Payments will be automatically as per your billing cycle.
+  </p>
+
+  <div class="flex gap-3 justify-center">
+    <button (click)="onContactAccountManager()" class="btn btn-outline">
+      Contact Account Manager
+    </button>
+    <button (click)="onStartShipping()" class="btn btn-primary">
+      Start Shipping
+    </button>
+  </div>
+</div>
