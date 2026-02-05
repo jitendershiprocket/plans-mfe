@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, delay, map, catchError } from 'rxjs';
 import { PricingPlan, ShipmentDetails, PlanActivationRequest, PlanActivationResponse, PlanBenefits, PlansApiResponse, PlanApiData, PlanFeature, PlanMilestoneMatrix } from '../models/plan.model';
 import { AuthService } from './auth.service';
+import { API_BASE_URL } from '../config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class PlansService {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
   
-  private readonly API_BASE_URL = 'https://multichannel-channels-partnerships-qa-api.kartrocket.com/v1/settings/plans';
+  private readonly PLANS_API_BASE_URL = `${API_BASE_URL}settings/plans`;
   private readonly RATE_API_URL = 'https://serviceability.shiprocket.in/open/courier/serviceability';
 
   /**
@@ -19,7 +20,7 @@ export class PlansService {
    * Uses Angular 21 withFetch() for better performance
    */
   getPlans(): Observable<PricingPlan[]> {
-    const url = `${this.API_BASE_URL}/allPlansDetails`;
+    const url = `${this.PLANS_API_BASE_URL}/allPlansDetails`;
     const params = new HttpParams().set('is_web', '1');
     const headers = this.authService.getAuthHeaders();
 
@@ -173,6 +174,7 @@ export class PlansService {
     return {
       id: planId,
       name: planName,
+      productId: plan.pricing?.whmcs_product_id,
       price: price,
       priceDisplay: priceDisplay,
       description: description,

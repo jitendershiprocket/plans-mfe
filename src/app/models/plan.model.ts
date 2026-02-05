@@ -14,6 +14,8 @@ export interface PlanMilestoneMatrix {
 export interface PricingPlan {
   id: string;
   name: string;
+  // Product id used for subscription/mandate initiation (whmcs_product_id)
+  productId?: number;
   price: number;
   priceDisplay: string; // e.g., "FREE" or "₹199/month"
   description: string; // e.g., "Ideal for shipping upto 5 orders monthly"

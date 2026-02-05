@@ -1,0 +1,115 @@
+<div class="subscription-modal-container">
+  <button class="subscription-modal-close" (click)="onContinueWithCurrent()">
+    ×
+  </button>
+
+  <!-- Initial view: plan cards + CTA -->
+  <div *ngIf="!qrCode">
+    <div class="subscription-modal-header">
+      <h2 class="subscription-modal-title">
+        Save upto <span class="highlight">10% on each shipment</span>
+      </h2>
+      <p class="subscription-modal-subtitle">
+        Upgrade to
+        <span class="font-semibold">{{ plan?.name || 'Business Plan' }}</span>
+        and get cheaper shipping rates.
+      </p>
+    </div>
+
+    <div class="subscription-modal-body">
+      <!-- Plans summary (top section, same as SR_Web style) -->
+      <div class="subscription-plan-card">
+        <div class="subscription-plan-current">
+          <div class="plan-label">Current Plan</div>
+          <div class="plan-price">₹0 / month</div>
+          <p class="plan-desc">
+            Pay higher shipping rates on each shipment.
+          </p>
+        </div>
+
+        <div class="subscription-plan-upgrade">
+          <div class="plan-badge">Recommended</div>
+          <div class="plan-label">
+            {{ plan?.name || 'Business Plan' }}
+          </div>
+          <div class="plan-price">
+            {{ plan?.priceDisplay || '₹99 / month' }}
+          </div>
+          <p class="plan-desc saving">
+            Save upto 10% on each shipment.
+          </p>
+        </div>
+      </div>
+
+      <!-- If mandate not started yet OR timed out → show CTA buttons -->
+      <div
+        class="subscription-modal-actions"
+        *ngIf="paymentStatus === 'idle' || paymentStatus === 'timeout' || !qrCode"
+      >
+        <button
+          type="button"
+          class="btn-upgrade"
+          (click)="onUpgrade()"
+        >
+          {{ paymentStatus === 'timeout' ? 'Retry & Generate QR Code' : 'Upgrade & Activate Plan' }}
+        </button>
+
+        <button
+          type="button"
+          class="btn-outline"
+          (click)="onContinueWithCurrent()"
+        >
+          Continue with current plan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pure QR view once mandate is created -->
+  <div *ngIf="qrCode" class="subscription-modal-body">
+      <div class="qr-section">
+        <div class="qr-left">
+          <h3 class="qr-title">
+            Scan QR with any UPI app
+          </h3>
+          <p class="qr-subtitle">
+            Approve monthly mandate of
+            <span class="font-semibold">
+              ₹{{ mandateAmount || plan?.price || 0 }}
+              <span *ngIf="currency"> {{ currency }}</span>
+            </span>
+          </p>
+
+          <div class="qr-meta">
+            <div><span class="meta-label">Merchant</span> {{ merchantName }}</div>
+            <div><span class="meta-label">VPA</span> {{ merchantVpa }}</div>
+            <div *ngIf="mandateAmount">
+              <span class="meta-label">Amount</span>
+              ₹{{ mandateAmount }} <span *ngIf="currency">({{ currency }})</span>
+            </div>
+            <div><span class="meta-label">From</span> {{ fromDate }}</div>
+            <div><span class="meta-label">To</span> {{ toDate }}</div>
+            <div><span class="meta-label">Frequency</span> {{ frequency }}</div>
+            <div *ngIf="shortLink">
+              <span class="meta-label">UPI Link</span>
+              {{ shortLink }}
+            </div>
+          </div>
+
+          <div class="timer">
+            <span class="time">{{ formatTime(timeRemaining) }}</span>
+            <span class="timer-label">Time remaining</span>
+          </div>
+        </div>
+
+        <div class="qr-right">
+          <img
+            [src]="'data:image/png;base64,' + qrCode"
+            alt="UPI QR Code"
+            class="qr-img"
+          />
+        </div>
+      </div>
+    </div>
+</div>
+

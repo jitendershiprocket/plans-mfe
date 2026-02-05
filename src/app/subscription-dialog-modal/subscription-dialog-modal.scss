@@ -1,0 +1,133 @@
+.subscription-modal-container {
+  @apply relative bg-white rounded-2xl shadow-[0_2px_16px_rgba(15,23,42,0.12)] p-6 md:p-8 max-w-xl w-full;
+}
+
+.subscription-modal-close {
+  @apply absolute top-4 right-4 text-slate-500 hover:text-slate-700 text-2xl leading-none;
+  @apply bg-transparent border-0 cursor-pointer;
+}
+
+.subscription-modal-header {
+  @apply mb-6;
+}
+
+.subscription-modal-title {
+  @apply text-2xl md:text-3xl font-bold text-slate-900 mb-2;
+}
+
+.subscription-modal-title .highlight {
+  @apply text-[#745BD1];
+}
+
+.subscription-modal-subtitle {
+  @apply text-sm md:text-base text-slate-600;
+}
+
+.subscription-modal-body {
+  @apply space-y-6 mt-2;
+}
+
+.subscription-plan-card {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.subscription-plan-current,
+.subscription-plan-upgrade {
+  @apply border rounded-xl p-4 md:p-5 bg-slate-50;
+}
+
+.subscription-plan-upgrade {
+  @apply border-[#745BD1] bg-[#F6F2FF] relative;
+}
+
+.plan-badge {
+  @apply absolute -top-3 left-4 bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm;
+}
+
+.plan-label {
+  @apply text-sm font-semibold text-slate-800 mb-1;
+}
+
+.plan-price {
+  @apply text-lg md:text-xl font-bold text-[#745BD1] mb-2;
+}
+
+.plan-desc {
+  @apply text-xs md:text-sm text-slate-600;
+}
+
+.plan-desc.saving {
+  @apply text-emerald-700;
+}
+
+.subscription-modal-actions {
+  @apply flex flex-col md:flex-row gap-3 md:justify-end;
+}
+
+.btn-upgrade {
+  @apply inline-flex items-center justify-center px-4 py-2.5 rounded-md text-sm font-semibold;
+  @apply bg-[#745BD1] text-white hover:bg-[#5f47c0] transition-colors;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center px-4 py-2.5 rounded-md text-sm font-medium;
+  @apply border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 transition-colors;
+}
+
+.qr-section {
+  @apply mt-4 flex flex-col md:flex-row gap-6 items-start;
+}
+
+.qr-left {
+  @apply flex-1;
+}
+
+.qr-right {
+  @apply flex-shrink-0 flex items-center justify-center;
+}
+
+.qr-title {
+  @apply text-lg font-semibold text-slate-900 mb-1;
+}
+
+.qr-subtitle {
+  @apply text-sm text-slate-600 mb-3;
+}
+
+.qr-meta {
+  @apply text-xs md:text-sm text-slate-700 space-y-1 mb-4;
+}
+
+.meta-label {
+  @apply font-semibold text-slate-500 mr-2;
+}
+
+.qr-img {
+  @apply h-40 w-40 md:h-48 md:w-48 rounded-xl bg-white shadow-md;
+}
+
+.timer {
+  @apply mt-2 flex items-baseline gap-2;
+}
+
+.time {
+  @apply text-xl font-semibold text-[#745BD1];
+}
+
+.timer-label {
+  @apply text-xs text-slate-500;
+}
+
+.thankyou-text {
+  @apply text-sm md:text-base text-slate-700 mb-2;
+}
+
+.thankyou-text-secondary {
+  @apply text-xs md:text-sm text-slate-600;
+}
+
+.countdown {
+  @apply font-semibold text-[#745BD1];
+}
+
+

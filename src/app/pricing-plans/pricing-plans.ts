@@ -12,6 +12,7 @@ import { getImage } from '../cdn-icons-images/getImage/getImage';
 import { CdnIconComponent } from '../cdn-icons-images/getIcon/cdn-icon.component';
 import { FeaturesSection } from './features-section/features-section';
 import { IntegrationSection } from './integration-section/integration-section';
+import { SubscriptionDialogModal } from '../subscription-dialog-modal/subscription-dialog-modal';
 @Component({
   selector: 'app-pricing-plans',
   imports: [CdnIconComponent, FeaturesSection, IntegrationSection], // Import CdnIconComponent for icons, FeaturesSection, and IntegrationSection
@@ -190,26 +191,45 @@ export class PricingPlans implements OnInit {
   }
 
   confirmActivation(plan: PricingPlan): void {
+    // Open lightweight subscription dialog (local copy of SR_Web subscription popup).
+    // After user confirms upgrade ("payment success"), proceed with activation and success modal.
+    this.modalService
+      .open(SubscriptionDialogModal, { plan }, '700px')
+      .subscribe((result: 'upgrade' | 'cancel' | undefined) => {
+        if (result === 'upgrade') {
+          this.executePlanActivation(plan);
+        }
+      });
+  }
+
+  /**
+   * Actual activation flow (API call + success modal + reload).
+   * Called either directly or after shell reports subscription success.
+   */
+  private executePlanActivation(plan: PricingPlan): void {
     this.loading.set(true);
     this.cdr.markForCheck();
-    this.plansService.activatePlan({
-      planId: plan.id,
-      shipmentDetails: this.shipmentDetails()
-    }).subscribe({
-      next: (response: PlanActivationResponse) => {
-        this.loading.set(false);
-        if (response.success) {
-          this.openActivationSuccessModal(plan, response);
-          this.loadPlans(); // Reload to get updated current plan
-        }
-        this.cdr.markForCheck();
-      },
-      error: (error: any) => {
-        console.error('Error activating plan:', error);
-        this.loading.set(false);
-        this.cdr.markForCheck();
-      }
-    });
+
+    this.plansService
+      .activatePlan({
+        planId: plan.id,
+        shipmentDetails: this.shipmentDetails(),
+      })
+      .subscribe({
+        next: (response: PlanActivationResponse) => {
+          this.loading.set(false);
+          if (response.success) {
+            this.openActivationSuccessModal(plan, response);
+            this.loadPlans(); // Reload to get updated current plan
+          }
+          this.cdr.markForCheck();
+        },
+        error: (error: any) => {
+          console.error('Error activating plan:', error);
+          this.loading.set(false);
+          this.cdr.markForCheck();
+        },
+      });
   }
 
   openActivationSuccessModal(plan: PricingPlan, response: PlanActivationResponse): void {
