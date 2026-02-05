@@ -1,23 +1,11 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
-import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(
-      routes,
-      withComponentInputBinding(), // Enable component input binding for faster routing
-      withInMemoryScrolling({
-        scrollPositionRestoration: 'top',
-        anchorScrolling: 'enabled'
-      })
-    ),
-    provideHttpClient(
-      withInterceptorsFromDi(),
-      withFetch() // Use Fetch API for better performance (Angular 21 feature)
-    )
+    provideRouter(routes)
   ]
 };
