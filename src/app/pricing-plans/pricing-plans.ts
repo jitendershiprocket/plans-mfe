@@ -7,9 +7,10 @@ import { ModalService } from '../services/modal.service';
 import { getImage } from '../cdn-icons-images/getImage/getImage';
 import { CdnIconComponent } from '../cdn-icons-images/getIcon/cdn-icon.component';
 import { FeaturesSection } from './features-section/features-section';
+import { IntegrationSection } from './integration-section/integration-section';
 @Component({
   selector: 'app-pricing-plans',
-  imports: [CdnIconComponent, FeaturesSection], // Import CdnIconComponent for icons and FeaturesSection
+  imports: [CdnIconComponent, FeaturesSection, IntegrationSection], // Import CdnIconComponent for icons, FeaturesSection, and IntegrationSection
   templateUrl: './pricing-plans.html',
   styleUrl: './pricing-plans.scss',
   changeDetection: ChangeDetectionStrategy.OnPush // Optimize change detection

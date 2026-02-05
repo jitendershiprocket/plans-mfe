@@ -45,7 +45,21 @@ export class CdnIconComponent {
     'warning': 'https://sr-cdn-1.shiprocket.in/img/plan-pricing-warning4feb26.png',
     'calculator' : 'https://sr-cdn-1.shiprocket.in/img/calculatorfeb426.svg',
     'green-filled' : 'https://sr-cdn-1.shiprocket.in/img/tick-filledfeb426.png',
-    'recommended' :'https://sr-cdn-1.shiprocket.in/img/recomented_icon_planpricingfeb426.png'
+    'recommended' :'https://sr-cdn-1.shiprocket.in/img/recomented_icon_planpricingfeb426.png',
+   'plan_pricing_integration_1': 'https://sr-cdn-1.shiprocket.in/img/plan-pricing_integration_1.png',
+   'plan_pricing_integration_2': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_2.png',
+   'plan_pricing_integration_3': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_3.png',
+   'plan_pricing_integration_4': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_4.png',
+   'plan_pricing_integration_5': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_5.png',
+   'plan_pricing_integration_6': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_6.png',
+   'plan_pricing_integration_7': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_7.png',
+   'plan_pricing_integration_8': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_8.png',
+   'plan_pricing_integration_9': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_9.png',
+   'plan_pricing_integration_10': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_7.png',
+   'plan_pricing_integration_11': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_11.png',
+   'plan_pricing_integration_12': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_12.png',
+   'plan_pricing_integration_13': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_13.png',
+   'plan_pricing_integration_14': 'https://sr-cdn-1.shiprocket.in/img/plan_pricing_integration_5.png',
   };
 
   get iconUrl(): string {
