@@ -3,7 +3,7 @@
 
 // Pricing Cards Container - Handles responsive scroll
 .pricing-cards-container {
-  @apply mb-10 pt-3;
+  @apply mb-6 pt-3;
   
   @media (max-width: 1000px) {
     @apply overflow-x-auto;
@@ -41,7 +41,7 @@
 
 // Current Plan Card Styles
 .pricing-plan-card-current {
-  @apply bg-[#06064D] rounded-[12px] w-full max-w-[257px] h-[696px] relative;
+  @apply bg-[#06064D] rounded-[12px] w-full max-w-[257px] relative;
 }
 
 .pricing-plan-current-label {
@@ -65,7 +65,7 @@
 
 .pricing-plan-card-inner-current {
   @apply box-border flex flex-col justify-between items-start gap-[26px];
-  @apply absolute left-[2px] top-[28px] w-[calc(100%-4px)] max-w-[251px] h-[664px];
+  @apply absolute left-[2px] top-[28px] w-[calc(100%-4px)] max-w-[251px] h-[645px] min-h-[662px];
   @apply bg-white border border-[#DDDDDD] rounded-[10px] z-0;
   
   @media (max-width: 767px) {

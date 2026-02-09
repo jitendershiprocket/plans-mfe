@@ -27,9 +27,12 @@ export class PlanActivationSuccessModal implements OnInit {
   onContactAccountManager(): void {
     console.log('Contact account manager');
     this.modalService.close();
+    window.location.href = '/user-profile';
+    
   }
 
   onStartShipping(): void {
     this.modalService.close();
+    window.location.href = '/orders/new';
   }
 }

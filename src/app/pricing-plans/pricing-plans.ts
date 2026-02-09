@@ -45,6 +45,8 @@ export class PricingPlans implements OnInit {
   readonly largeBusinessBgUrl = `url(${getImage('large-business-section-bg')})`;
   readonly calculatorBgUrl = `url(${getImage('calculator-bg')})`;
 
+  User= JSON.parse(localStorage.getItem('ngStorage-USER') || '{}');
+  renewalDate = this.User?.renewal_date;
   ngOnInit(): void {
     this.loadPlans();
   }
@@ -123,7 +125,7 @@ export class PricingPlans implements OnInit {
 
   activatePlan(plan: PricingPlan): void {
     const current = this.currentPlan();
-    if (current && this.isDowngrade(current, plan)) {
+    if (true) {
       this.openDowngradeConfirmation(plan);
     } else {
       this.confirmActivation(plan);
@@ -237,8 +239,8 @@ export class PricingPlans implements OnInit {
   }
 
   viewRateCard(plan: PricingPlan): void {
-    // TODO: Implement rate card view
-    console.log('View rate card for:', plan.name);
+    const url = `/tools/ratecard/forward?courier_type=domestic&plan_id=${plan.id}`;
+    window.location.href = url;
   }
 
   getImage(name: string): string {

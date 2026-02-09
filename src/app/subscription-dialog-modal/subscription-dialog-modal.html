@@ -116,13 +116,7 @@
             </div>
           </div>
 
-          <div class="timer-card">
-            <div class="timer-icon">⏱️</div>
-            <div class="timer-content">
-              <span class="time">{{ formatTime(timeRemaining) }}</span>
-              <span class="timer-label">Time remaining</span>
-            </div>
-          </div>
+          
         </div>
 
         <div class="qr-right">
@@ -133,6 +127,15 @@
               class="qr-img"
             />
             <div class="qr-instruction">Scan to pay with UPI</div>
+            <div class="flex gap-1 flex-col">
+            <span class="timer-label font-bold">Time remaining</span>
+            <div class="flex gap-1 border border-[#745BD1] rounded-2xl items-center justify-center py-1 px-2 w-max">
+            <div class="timer-icon">⏱️</div>
+            <div class="timer-content">
+              <span class="time">{{ formatTime(timeRemaining) }}</span>
+            </div>
+          </div>
+          </div>
           </div>
         </div>
       </div>
