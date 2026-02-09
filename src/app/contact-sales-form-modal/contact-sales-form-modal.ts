@@ -44,14 +44,24 @@ export class ContactSalesFormModal {
     '1001-5000',
     '5000+'
   ];
+  User= JSON.parse(localStorage.getItem('ngStorage-USER') || '{}');
+
 
   constructor() {
+    const fullName = this.User?.first_name && this.User?.last_name 
+      ? `${this.User.first_name} ${this.User.last_name}`.trim() 
+      : '';
+    const email = this.User?.email || '';
+    const phoneNumber = this.User?.mobile || '';
+    const companyName = this.User?.company_name || '';
+    const websiteUrl = this.User?.company_website_url || '';
+
     this.contactForm = this.fb.group({
-      fullName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      companyName: ['', [Validators.required]],
-      websiteUrl: [''],
+      fullName: [fullName, [Validators.required]],
+      email: [email, [Validators.required, Validators.email]],
+      phoneNumber: [phoneNumber, [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      companyName: [companyName, [Validators.required]],
+      websiteUrl: [websiteUrl],
       monthlyShipmentVolume: ['', [Validators.required]],
       currentShippingProvider: [''],
       specificRequirements: ['']

@@ -109,7 +109,7 @@
 }
 
 .qr-right {
-  @apply flex-shrink-0 flex items-center justify-center;
+  @apply flex-shrink-0 flex items-end justify-center;
 }
 
 .qr-header {
@@ -130,7 +130,7 @@
 
 .qr-meta-card {
   @apply bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 rounded-xl p-4 md:p-5;
-  @apply shadow-sm;
+  
 }
 
 .qr-meta-title {
@@ -164,7 +164,7 @@
 .qr-container {
   @apply bg-white ;
   @apply flex flex-col items-center gap-4;
-  @apply hover:shadow-xl transition-shadow duration-300;
+  @apply duration-300;
 }
 
 .qr-img {
@@ -178,11 +178,11 @@
 
 .timer-card {
   @apply bg-gradient-to-r from-[#745BD1] to-[#9575f5] rounded-xl p-4 md:p-5;
-  @apply flex items-center gap-4 shadow-md;
+  @apply flex items-center gap-4;
 }
 
 .timer-icon {
-  @apply text-3xl md:text-4xl;
+  @apply text-xl md:text-2xl;
 }
 
 .timer-content {
@@ -190,11 +190,11 @@
 }
 
 .time {
-  @apply text-2xl md:text-3xl font-bold text-white;
+  @apply text-2xl md:text-3xl font-bold text-[#745BD1];
 }
 
 .timer-label {
-  @apply text-xs md:text-sm text-white/90 font-medium;
+  @apply  text-[#745BD1]/90 ;
 }
 
 .thankyou-text {
