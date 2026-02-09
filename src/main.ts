@@ -10,23 +10,34 @@ bootstrapApplication(App, appConfig)
   .then(async (appRef) => {
     console.log('✅ plans-mfe: Application bootstrapped, initializing router...');
     
+    const router = appRef.injector.get(Router);
+    
+    // Force navigation to empty path before creating custom element
+    // This ensures router-outlet resolves correctly when the element renders
     try {
-      // Wait for router to initialize and navigate to default route
-      const router = appRef.injector.get(Router);
-      // For microfrontend, navigate to empty path (default route) without changing browser URL
-      await router.navigate([''], { 
+      console.log('🔄 plans-mfe: Navigating to default route...');
+      const navigationResult = await router.navigate([''], { 
         skipLocationChange: true,
-        replaceUrl: true 
+        replaceUrl: false
       });
-      console.log('✅ plans-mfe: Router initialized and navigated to default route');
-    } catch (routerError) {
-      console.warn('⚠️ plans-mfe: Router initialization warning:', routerError);
-      // Try to navigate anyway
+      
+      if (navigationResult === true) {
+        console.log('✅ plans-mfe: Router navigated to default route successfully');
+      } else {
+        console.warn('⚠️ plans-mfe: Router navigation returned false');
+      }
+      
+      // Wait a tick to ensure router state is fully updated
+      await new Promise(resolve => setTimeout(resolve, 0));
+      
+    } catch (routerError: any) {
+      console.error('❌ plans-mfe: Router navigation error:', routerError);
+      // If navigation fails, try to reset router state
       try {
-        const router = appRef.injector.get(Router);
-        await router.navigate([''], { skipLocationChange: true });
+        await router.navigateByUrl('/', { skipLocationChange: true, replaceUrl: false });
+        console.log('✅ plans-mfe: Router reset to root');
       } catch (e) {
-        console.warn('⚠️ plans-mfe: Could not navigate to default route:', e);
+        console.error('❌ plans-mfe: Could not reset router:', e);
       }
     }
     
