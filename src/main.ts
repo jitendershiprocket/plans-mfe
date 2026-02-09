@@ -1,19 +1,43 @@
 import { bootstrapApplication } from '@angular/platform-browser';
+import { createCustomElement } from '@angular/elements';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
+import { Router } from '@angular/router';
 
-// Bootstrap the application normally for development
-// For production (Web Component), this will be handled by the shell app
-console.log('Bootstrap: Starting plans-mfe application...');
+console.log('🚀 plans-mfe: Starting bootstrap...');
 
 bootstrapApplication(App, appConfig)
-  .then(() => {
-    console.log('✅ plans-mfe application bootstrapped successfully');
+  .then(async (appRef) => {
+    console.log('✅ plans-mfe: Application bootstrapped, initializing router...');
+    
+    try {
+      // Wait for router to initialize and navigate to default route
+      const router = appRef.injector.get(Router);
+      await router.initialNavigation();
+      console.log('✅ plans-mfe: Router initialized');
+    } catch (routerError) {
+      console.warn('⚠️ plans-mfe: Router initialization warning:', routerError);
+      // Continue anyway - router might already be initialized
+    }
+    
+    console.log('✅ plans-mfe: Creating custom element...');
+    const PlansElement = createCustomElement(App, { injector: appRef.injector });
+
+    if (!customElements.get('plans-mfe-root')) {
+      customElements.define('plans-mfe-root', PlansElement);
+      console.log('✅ plans-mfe: <plans-mfe-root> custom element registered successfully');
+      
+      // Dispatch custom event to notify shell that element is ready
+      window.dispatchEvent(new CustomEvent('plans-mfe-ready'));
+    } else {
+      console.log('ℹ️ plans-mfe: <plans-mfe-root> already registered');
+      window.dispatchEvent(new CustomEvent('plans-mfe-ready'));
+    }
   })
   .catch((err) => {
-    console.error('❌ Error bootstrapping application:', err);
-    // Log full error details
+    console.error('❌ plans-mfe: Error bootstrapping custom element:', err);
     if (err.stack) {
       console.error('Stack trace:', err.stack);
     }
+    window.dispatchEvent(new CustomEvent('plans-mfe-error', { detail: err }));
   });
