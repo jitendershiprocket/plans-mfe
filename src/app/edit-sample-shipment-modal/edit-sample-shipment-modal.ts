@@ -24,7 +24,7 @@ export class EditSampleShipmentModal implements OnInit {
 
   shipmentForm: FormGroup;
   weightOptions = ['500g', '1kg', '2kg'];
-  modeOptions = ['Surface', 'Air'];
+  modeOptions = ['Surface'];
   paymentOptions = ['Prepaid', 'COD'];
   result?: ShipmentDetails;
 
