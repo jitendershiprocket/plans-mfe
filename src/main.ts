@@ -13,11 +13,21 @@ bootstrapApplication(App, appConfig)
     try {
       // Wait for router to initialize and navigate to default route
       const router = appRef.injector.get(Router);
-      await router.initialNavigation();
-      console.log('✅ plans-mfe: Router initialized');
+      // For microfrontend, navigate to empty path (default route) without changing browser URL
+      await router.navigate([''], { 
+        skipLocationChange: true,
+        replaceUrl: true 
+      });
+      console.log('✅ plans-mfe: Router initialized and navigated to default route');
     } catch (routerError) {
       console.warn('⚠️ plans-mfe: Router initialization warning:', routerError);
-      // Continue anyway - router might already be initialized
+      // Try to navigate anyway
+      try {
+        const router = appRef.injector.get(Router);
+        await router.navigate([''], { skipLocationChange: true });
+      } catch (e) {
+        console.warn('⚠️ plans-mfe: Could not navigate to default route:', e);
+      }
     }
     
     console.log('✅ plans-mfe: Creating custom element...');
