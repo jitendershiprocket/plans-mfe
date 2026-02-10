@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // Ensure Tailwind utilities win over host app (SR_Web) styles when embedded
-  // This adds !important to Tailwind utilities so SR_Web CSS can't override them
-  important: true,
+  // Scope Tailwind utilities to the custom element so they don't affect the host app (SR_Web)
+  // This generates rules like: plans-mfe-root .class { ... !important }
+  important: 'plans-mfe-root',
   content: [
     "./src/**/*.{html,ts}",
   ],
@@ -24,6 +24,10 @@ module.exports = {
         'sf-pro-bold': ['SFProDisplay-Bold'],
       },
     },
+  },
+  // Disable Tailwind's global reset since this MFE is embedded inside another app
+  corePlugins: {
+    preflight: false,
   },
   plugins: [ ],
 }
