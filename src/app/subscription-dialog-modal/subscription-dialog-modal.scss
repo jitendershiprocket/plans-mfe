@@ -101,7 +101,7 @@
 }
 
 .qr-section {
-  @apply mt-4 flex flex-col-reverse md:flex-row gap-6 md:gap-8 items-stretch;
+  @apply mt-4 flex flex-col md:flex-row gap-6 md:gap-8 items-stretch;
 }
 
 .qr-left {
