@@ -8,6 +8,14 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+  <!--
+    Wrap the Angular root inside <plans-mfe-root>:
+    - Angular dev bootstrap still finds <app-root> (avoids NG05104)
+    - Tailwind scoped with `important: 'plans-mfe-root'` still works
+    - In SR_Web, the shell uses <plans-mfe-root> as the custom element host
+  -->
+  <plans-mfe-root>
+    <app-root></app-root>
+  </plans-mfe-root>
 </body>
 </html>

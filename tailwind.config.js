@@ -1,11 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // Scope Tailwind utilities to the custom element so they don't affect the host app (SR_Web)
-  // This generates rules like: plans-mfe-root .class { ... !important }
-  important: 'plans-mfe-root',
   content: [
     "./src/**/*.{html,ts}",
   ],
+
+  /**
+   * Scope all Tailwind utilities to the <plans-mfe-root> custom element
+   * so that SR_Web (shell) global CSS cannot override them.
+   *
+   * This generates selectors like:
+   *   plans-mfe-root .flex { display: flex; }
+   * instead of:
+   *   .flex { display: flex; }
+   *
+   * Ensure the shell always renders the microfrontend inside <plans-mfe-root>.
+   */
+  important: 'plans-mfe-root',
+
   theme: {
     extend: {
       colors: {
@@ -25,10 +36,6 @@ module.exports = {
       },
     },
   },
-  // Disable Tailwind's global reset since this MFE is embedded inside another app
-  corePlugins: {
-    preflight: false,
-  },
-  plugins: [ ],
+  plugins: [],
 }
 
