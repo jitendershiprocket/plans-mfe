@@ -2,8 +2,11 @@
   <div class="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6">
     <span class="text-white text-5xl font-bold">✓</span>
   </div>
-  
-  <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ plan?.name }} Plan Activated!</h2>
+  @if(plan?.name !== 'Business Plan'){
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ plan?.name }} Plan Activated!</h2>
+  } @else {
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">{{ plan?.name }} Activated!</h2>
+  }
   
   <p class="text-base text-gray-600 mb-6 leading-relaxed">
     Your shipping journey just got better, with even more rates and features that support your growth.

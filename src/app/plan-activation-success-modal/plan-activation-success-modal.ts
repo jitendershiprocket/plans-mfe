@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PricingPlan } from '../models/plan.model';
 import { ModalService } from '../services/modal.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-plan-activation-success-modal',
   imports: [], // No imports needed - using built-in control flow
@@ -10,7 +10,7 @@ import { ModalService } from '../services/modal.service';
 })
 export class PlanActivationSuccessModal implements OnInit {
   private modalService = inject(ModalService);
-
+  private route = inject(Router);
   plan?: PricingPlan;
   billingCycleDate?: string;
 
@@ -27,12 +27,15 @@ export class PlanActivationSuccessModal implements OnInit {
   onContactAccountManager(): void {
     console.log('Contact account manager');
     this.modalService.close();
-    window.location.href = '/user-profile';
+    this.route.navigateByUrl('/seller/user-profile');
+    
+    // window.location.href = '/user-profile';
     
   }
 
   onStartShipping(): void {
     this.modalService.close();
-    window.location.href = '/orders/new';
+    this.route.navigateByUrl('/seller/orders/new');
+    // window.location.href = '/orders/new';
   }
 }
