@@ -12,6 +12,7 @@ import { getImage } from '../cdn-icons-images/getImage/getImage';
 import { CdnIconComponent } from '../cdn-icons-images/getIcon/cdn-icon.component';
 import { FeaturesSection } from './features-section/features-section';
 import { IntegrationSection } from './integration-section/integration-section';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-pricing-plans',
   imports: [CdnIconComponent, FeaturesSection, IntegrationSection], // Import CdnIconComponent for icons, FeaturesSection, and IntegrationSection
@@ -24,7 +25,7 @@ export class PricingPlans implements OnInit, OnDestroy {
   private modalService = inject(ModalService);
   private cdr = inject(ChangeDetectorRef);
   private sanitizer = inject(DomSanitizer);
-
+  private route = inject(Router);
   // Track modal subscriptions to prevent leaks
   private editShipmentModalSubscription?: Subscription;
 
@@ -287,8 +288,9 @@ export class PricingPlans implements OnInit, OnDestroy {
   }
 
   viewRateCard(plan: PricingPlan): void {
-    const url = `/tools/ratecard/forward?courier_type=domestic&plan_id=${plan.id}`;
-    window.location.href = url;
+    const url = `/seller/tools/ratecard/forward?courier_type=domestic&plan_id=${plan.id}`;
+    // window.location.href = url;
+    this.route.navigateByUrl(url);
   }
 
   getImage(name: string): string {

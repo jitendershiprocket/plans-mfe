@@ -109,6 +109,7 @@ export class SubscriptionDialogModal implements OnInit, OnDestroy {
     // Reset state and reinitiate mandate
     this.paymentStatus = 'idle';
     this.qrCode = null;
+    this.showIntro = false;
     this.paymentId = null;
     this.timeRemaining = 120;
     this.cdr.detectChanges();
