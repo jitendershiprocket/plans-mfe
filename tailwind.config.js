@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // Ensure Tailwind utilities win over host app (SR_Web) styles when embedded
+  // This adds !important to Tailwind utilities so SR_Web CSS can't override them
+  important: true,
   content: [
     "./src/**/*.{html,ts}",
   ],
