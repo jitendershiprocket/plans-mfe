@@ -25,23 +25,23 @@
 }
 
 .pricing-cards-wrapper {
-  @apply flex gap-6;
-  
-  @media (min-width: 1001px) {
-    @apply grid grid-cols-4;
-  }
+  @apply grid gap-6;
+  /* Flexible equal-width cards: auto-fit as many as possible, all same width */
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
 }
 
 // Pricing Plan Card Styles
 .pricing-plan-card {
   @apply box-border flex flex-row justify-center items-center;
-  @apply w-full max-w-[255px] min-h-[694px] bg-white border border-[#EDEFF7] rounded-[12px];
+  /* Full responsive width per grid cell, no fixed max-width */
+  @apply w-full min-h-[694px] bg-white border border-[#EDEFF7] rounded-[12px];
   @apply shadow-[0px_2px_12px_rgba(0,0,10,0.02)] relative;
 }
 
 // Current Plan Card Styles
 .pricing-plan-card-current {
-  @apply bg-[#06064D] rounded-[12px] w-full max-w-[257px] relative;
+  /* Match width with other cards, only change background */
+  @apply bg-[#06064D] rounded-[12px] w-full relative;
 }
 
 .pricing-plan-current-label {
@@ -56,7 +56,8 @@
 
 .pricing-plan-card-inner {
   @apply flex flex-col justify-between items-start gap-[26px];
-  @apply w-full max-w-[207px] h-full z-0;
+  /* Let inner content span full card width */
+  @apply w-full h-full z-0;
   
   @media (max-width: 767px) {
     @apply px-4;
@@ -65,7 +66,8 @@
 
 .pricing-plan-card-inner-current {
   @apply box-border flex flex-col justify-between items-start gap-[26px];
-  @apply absolute left-[2px] top-[28px] w-[calc(100%-4px)] max-w-[251px] h-[645px] min-h-[662px];
+  /* Inner inset card should also span full available width */
+  @apply absolute left-[2px] top-[28px] w-[calc(100%-4px)] h-[645px] min-h-[662px];
   @apply bg-white border border-[#DDDDDD] rounded-[10px] z-0;
   
   @media (max-width: 767px) {
@@ -74,11 +76,11 @@
 }
 
 .pricing-plan-header {
-  @apply flex flex-col items-start gap-5 mx-auto w-full max-w-[207px];
+  @apply flex flex-col items-start gap-5 mx-auto w-full;
 }
 
 .pricing-plan-title-section {
-  @apply flex flex-col items-start w-full max-w-[207px];
+  @apply flex flex-col items-start w-full;
 }
 
 .pricing-plan-name {
@@ -87,19 +89,19 @@
 }
 
 .pricing-plan-price-section {
-  @apply flex flex-col items-start w-full max-w-[207px];
+  @apply flex flex-col items-start w-full;
 }
 
 .pricing-plan-price {
-  @apply w-full max-w-[207px] font-semibold text-[24px] leading-[150%] text-[#745BE7] flex items-center;
+  @apply w-full font-semibold text-[24px] leading-[150%] text-[#745BE7] flex items-center;
 }
 
 .pricing-plan-description {
-  @apply w-full max-w-[207px] text-[12px] leading-[150%] text-[#373B62];
+  @apply w-full text-[12px] leading-[150%] text-[#373B62];
 }
 
 .pricing-plan-avg-cost {
-  @apply flex flex-col justify-between items-start gap-1 p-3 w-full max-w-[207px] min-h-[75px] pb-5;
+  @apply flex flex-col justify-between items-start gap-1 p-3 w-full min-h-[75px] pb-5;
   @apply bg-[#F6F6FF] rounded-[8px];
 }
 
@@ -120,15 +122,15 @@
 }
 
 .pricing-plan-features {
-  @apply flex flex-col items-start gap-3 w-full max-w-[207px];
+  @apply flex flex-col items-start gap-3 w-full;
 }
 
 .pricing-plan-features-label {
-  @apply w-full max-w-[175px] text-[14px] leading-5 text-[#8084AC] flex items-center;
+  @apply w-full text-[14px] leading-5 text-[#8084AC] flex items-center;
 }
 
 .pricing-plan-features-list {
-  @apply flex flex-col items-start w-full max-w-[207px] list-none m-0;
+  @apply flex flex-col items-start w-full list-none m-0;
 }
 
 .pricing-plan-feature-item {
@@ -140,12 +142,12 @@
 }
 
 .pricing-plan-actions {
-  @apply flex flex-col items-center gap-4 mx-auto w-full max-w-[207px] min-h-[64px];
+  @apply flex flex-col items-center gap-4 mx-auto w-full min-h-[64px];
 }
 
 .pricing-plan-activate-btn {
   @apply box-border flex flex-row justify-center items-center gap-[6.36px];
-  @apply w-full max-w-[207px] h-[34px] px-[13.5128px] py-[6.35897px];
+  @apply w-full h-[34px] px-[13.5128px] py-[6.35897px];
   @apply bg-[#745BE7] border border-[#6964E2] rounded-[6px] cursor-pointer;
   @apply font-semibold text-[14px] leading-[17px] text-white text-center capitalize;
   @apply transition-opacity duration-200;
@@ -167,7 +169,7 @@
 }
 
 .pricing-plan-renewal-section {
-  @apply flex flex-col items-center gap-3 w-full max-w-[207px];
+  @apply flex flex-col items-center gap-3 w-full;
 }
 
 .pricing-plan-renewal-date {
