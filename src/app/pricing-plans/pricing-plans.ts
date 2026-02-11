@@ -12,7 +12,6 @@ import { getImage } from '../cdn-icons-images/getImage/getImage';
 import { CdnIconComponent } from '../cdn-icons-images/getIcon/cdn-icon.component';
 import { FeaturesSection } from './features-section/features-section';
 import { IntegrationSection } from './integration-section/integration-section';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-pricing-plans',
   imports: [CdnIconComponent, FeaturesSection, IntegrationSection], // Import CdnIconComponent for icons, FeaturesSection, and IntegrationSection
@@ -25,7 +24,6 @@ export class PricingPlans implements OnInit, OnDestroy {
   private modalService = inject(ModalService);
   private cdr = inject(ChangeDetectorRef);
   private sanitizer = inject(DomSanitizer);
-  private route = inject(Router);
   // Track modal subscriptions to prevent leaks
   private editShipmentModalSubscription?: Subscription;
 
@@ -289,8 +287,26 @@ export class PricingPlans implements OnInit, OnDestroy {
 
   viewRateCard(plan: PricingPlan): void {
     const url = `/seller/tools/ratecard/forward?courier_type=domestic&plan_id=${plan.id}`;
-    // window.location.href = url;
-    this.route.navigateByUrl(url);
+    /**
+     * We are running inside SR_Web as a web component.
+     * The plans-mfe Angular Router only knows plans-mfe routes, not SR_Web routes.
+     *
+     * So we emit a navigation event and let the shell handle SPA navigation.
+     * Fallback to full-page navigation if the host doesn't listen to the event.
+     */
+    if (typeof window !== 'undefined') {
+      try {
+        window.dispatchEvent(new CustomEvent('plans-mfe-navigate', { detail: { url } }));
+      } catch (e) {
+        // ignore
+      }
+      // Fallback: if shell doesn't handle it, do a full navigation.
+      setTimeout(() => {
+        if (window.location.pathname + window.location.search !== url) {
+          window.location.href = url;
+        }
+      }, 0);
+    }
   }
 
   getImage(name: string): string {
