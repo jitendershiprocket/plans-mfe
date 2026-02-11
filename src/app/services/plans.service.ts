@@ -166,7 +166,7 @@ export class PlansService {
   private mapPlanDataToPricingPlan(plan: PlanApiData, recommendedPlanId: string | null): PricingPlan {
     // Fields used in HTML: plan.id, plan.name, plan.priceDisplay, plan.description, 
     // plan.avgShipmentCost, plan.features[], plan.isCurrentPlan, plan.isRecommended,
-    // plan.shippingMilestone, plan.nextRenewalDate
+    // plan.shippingMilestone, plan.renewal_date
     
     const planId = String(plan.id || '');
     
@@ -225,7 +225,8 @@ export class PlansService {
       features: features,
       isCurrentPlan: isCurrentPlan,
       isRecommended: isRecommended,
-      nextRenewalDate: undefined, // Used in: @if (plan.nextRenewalDate) but not in API
+      // Prefer snake_case to match SR_Web conventions.
+      renewal_date: (plan as any)?.renewal_date ?? undefined,
       shippingMilestone: shippingMilestone,
       milestoneMatrix: milestoneMatrix,
       orderRange: { min: 0, max: Infinity } // Not used in HTML, but required by interface

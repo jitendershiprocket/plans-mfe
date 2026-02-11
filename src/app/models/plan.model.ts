@@ -23,7 +23,7 @@ export interface PricingPlan {
   features: PlanFeature[]; // Changed from string[] to PlanFeature[]
   isCurrentPlan: boolean;
   isRecommended: boolean;
-  nextRenewalDate?: string;
+  renewal_date?: string;
   shippingMilestone?: number; // e.g., 100, 500, 1000 for plan fee refund
   milestoneMatrix?: PlanMilestoneMatrix; // used to render the gift card + popup
   orderRange: {

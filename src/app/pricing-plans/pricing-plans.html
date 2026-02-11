@@ -131,12 +131,13 @@
             </button>
             }
             @if (plan.isCurrentPlan) {
-          <div class="pricing-plan-renewal-date mx-auto">Next renewal: &nbsp;<span class="font-bold">{{ renewalDate }}</span></div>
+          @if (plan.renewal_date) {
+          <div class="pricing-plan-renewal-date mx-auto">
+            Next renewal: &nbsp;<span class="font-bold">{{ plan.renewal_date }}</span>
+          </div>
+          }
           
             <div class="pricing-plan-renewal-section">
-              @if (plan.nextRenewalDate) {
-              <div class="pricing-plan-renewal-date">Next renewal: {{ plan.nextRenewalDate }}</div>
-              }
               <button class="pricing-plan-activate-btn pricing-plan-active-btn" disabled>
                 <app-cdn-icon name="green-tick" [width]="15" [height]="15"></app-cdn-icon>
                 <span>Active</span>
